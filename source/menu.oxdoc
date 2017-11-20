@@ -1,0 +1,50 @@
+/** A Class to create and display a menus of Ox functions.
+
+And example is here: <code>OxMenu\examples\example1.ox</code>
+
+<dd><pre>
+--------------- Ox at 19:39:43 on 19-Nov-2017 ---------------
+
+Ox Console version 7.20 (Windows/U) (C) J.A. Doornik, 1994-2017
+This version may be used for academic research and teaching only
+
+Interactive Menu: test                              The menu run begins
+[00] Run All (excluding sub-options)
+[01] Call 1
+[02] Call 2
+[03] Sub
+[-2]  Help on Menu
+[-1]  QUIT
+?<b>-2</b>                                          User enters -2 to see help
+
+---------------------------                        Menu has no extra help.
+Help:
+This is the default help text.
+
+---------------------------
+[00] Run All (excluding sub-options)
+[01] Call 1
+[02] Call 2
+[03] Sub
+[-2]  Help on Menu
+[-1]  QUIT
+?<b>1</b>                                        User chooses option 1
+Output of test:Call 1
+---------------------------
+Call 1
+... finished.                              
+Press any key and ENTER to continue or return
+
+[00] Run All (excluding sub-options)
+[01] Call 1
+[02] Call 2
+[03] Sub
+[-2]  Help on Menu
+[-1]  QUIT
+?<b>-1</b>                                           User quits
+    </pre></dd>
+
+
+@author  Copyright &copy; 2017 <a href="http://econ.queensu.ca/~ferrall">Christopher Ferrall</a>.
+
+**/

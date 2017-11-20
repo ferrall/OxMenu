@@ -1,0 +1,11 @@
+Log file created at 11/19/17 19:44:39
+oxdoc 1.1-beta [05/22/14]
+(c) Copyright 2005-2014 by Y. Zwols [yorizwols@users.sourceforge.net]
+
+oxdoc is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+See the LICENSE file for distribution details.
+
+Loading configuration file oxdoc.xml
+Reading file C:\Users\Chris\Documents\OFFICE\software\Microeconometrics\OxMenu\source\menu.ox
+Warning: Included file oxstd.h could not be opened. File will be ignored.
