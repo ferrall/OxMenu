@@ -1,4 +1,4 @@
-/** A Class to create and display a menus of Ox functions.
+/** A Class to create and display menus of Ox functions.
 
 And example is here: <code>OxMenu\examples\example1.ox</code>
 
@@ -32,7 +32,7 @@ This is the default help text.
 Output of test:Call 1
 ---------------------------
 Call 1
-... finished.                              
+... finished.
 Press any key and ENTER to continue or return
 
 [00] Run All (excluding sub-options)
@@ -47,4 +47,4 @@ Press any key and ENTER to continue or return
 
 @author  Copyright &copy; 2017 <a href="http://econ.queensu.ca/~ferrall">Christopher Ferrall</a>.
 
-**/
+**/ 

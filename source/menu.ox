@@ -20,7 +20,7 @@ Menu::Menu(name,IamMain) {
 
 /** Add an item to the menu.
 @param ... list of items, each an array of size ItemSize
-@example 
+@example
 	m->add( {"Call 1",call1},
 			{"Call 2",call2},
 			{"Sub ",menu3()}
@@ -38,24 +38,45 @@ Menu::add(...) {
 		}
 	}
 
-/** 
+/**
 @param item array, menu item
 @internal
 **/
 Menu::make_the_call(item) {
 	if (isclass(item[call])) {
-		item[call]->Run(logoutput);
+		item[call]->Run();
 		return;
 		}
 	if (!isfunction(item[call]))
 		return;
-	decl flog = logoutput ? fopen(item[prompt]+".txt","l") : 0;
+	decl flog = logoutput ? fopen(logdir+replace(item[prompt]," ","_")+".txt","l") : 0;
 	println("Output of ",name+":"+item[prompt],sep);
 	item[call]();
     println("... finished.\n");
 	if (isfile(flog)) fclose(flog);
 	flog = 0;
 	}
+
+/** Run options from command line if any, otherwise go interactive
+**/
+Menu::CmdLine() {
+	decl args = arglist(), nx = 1, cmdln=sizeof(args)>nx, r,i,k;
+    if (cmdln) {
+	   println("Command Line Options: ",name);
+       do {
+        sscan(args[nx++],"%t",&k);
+        if (isstring(k)){
+            foreach (r in items[i]) if (strfind(r[prompt][i],k)>-1) { k=i; break;}
+            if (isstring(k)) {
+                println("OxMenu Error: menu item not found ",k);
+                continue;
+                }
+            }
+        make_the_call(items[k]);
+       } while (sizeof(nx<sizeof(args)));
+       }
+    else Run();
+    }
 
 /** Run the menu.
 @param logoutput TRUE: create a logfile for this run.
@@ -64,18 +85,23 @@ Menu::make_the_call(item) {
 	m->Run();
 
 **/
-Menu::Run(logoutput) {
+Menu::Run() {
 	decl k, key, it;
-	this.logoutput = logoutput;
 	println("Interactive Menu: ",name);
     do {
 	   foreach (it in items[k] ) println("[","%02u",k,"] ",it[prompt]);
- 	   println("[-2]  Help on Menu");
- 	   scan(   "[-1]  ",IamMain ? "QUIT " : "go up to previous menu","\n?","%i",&k);
+ 	   println("[",HELP,"]  Help on Menu");
+       if (IamMain)
+ 	      println("[",QUIT,"]  QUIT ");
+       else {
+ 	      println("[",-3,"]  Exit Ox\n[",QUIT,"]  go up to previous menu");
+          }
+ 	   scan("? ","%i",&k);
 	   switch_single(k) {
+            case EXIT : exit(0);
 	   		case HELP : println(sep,"Help: \n",help_text,sep);
 	   		case QUIT : return;
-			case DOALL: 
+			case DOALL:
             	foreach(it in items)
 					if (isfunction(it[call])) make_the_call(it);
             	scan("Press any key and ENTER to continue\n","%2c",&key);
