@@ -72,7 +72,13 @@ Menu::CmdLine() {
                 continue;
                 }
             }
-        make_the_call(items[k]);
+        if (isclass(items[k][call])) {
+            decl k2;
+            sscan(args[nx++],"%t",&k2);
+            make_the_call(items[k][call].items[k2]);
+            }
+        else
+            make_the_call(items[k]);
        } while (sizeof(nx<sizeof(args)));
        }
     else Run();
