@@ -1,0 +1,11 @@
+Output of test:Call 2
+---------------------------
+KEEP LOG 1 0
+Call 2. Do whatever
+... finished.
+[00] Run All (excluding sub-options)
+[01] Call 1
+[02] Call 2
+[03] Sub 
+[-2]  Help on Menu
+[-1]  QUIT 

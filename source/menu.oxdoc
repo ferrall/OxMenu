@@ -20,16 +20,21 @@
 are in the form: <code>k=val</code> where <code>k</code> is the index, "=" is the equal sign and <code>val</code> is either an integer, double or a string containing elements of a matrix parameter to be scanned in using the "%M" formatting code.
 
 <details><summary>An CallMenu example: <a href="javascript:popoxcode('../examples/example1.ox');">examples/example1.ox</a>.</summary>
-    <pre><object width="75%" height="200" type="text/plain" data="../examples/example1.ox" border="1" ><p style="font-size:24pt"></object>
-    </pre>
-<dd><pre>
-<object width="75%" height="200" type="text/plain" data="../examples/example1.ox" border="1" ><p style="font-size:24pt"></object>
-</pre></dd></details>
+<dd><h4>Code</h4>    
+<pre><object width="95%" height="300" type="text/plain" data="../examples/example1.ox" border="1" ></object></pre>
+<h4>Output</h4>
+<pre><object width="95%" height="200" type="text/plain" data="../examples/example1.txt" border="1" ></object>
+</pre>
+</dd>
+
+</details>
 
 
-<details><summary>A ParamMenu example: <code>OxMenu\examples\example2.ox</code></summary>
-<dd><pre><a href="javascript:popoxcode('../examples/example2.ox');">examples/example2.ox</a>.</summary>
-    <pre><object width="75%" height="200" type="text/plain" data="../examples/example2.ox" border="1" ><p style="font-size:24pt"></object>
+<details><summary>A ParamMenu example:<a href="javascript:popoxcode('../examples/example2.ox');">examples/example2.ox</a>.</summary>
+<dd><h4>Code</h4>
+<pre><object width="95%" height="300" type="text/plain" data="../examples/example2.ox" border="1" ></object>
+<h4>Output</h4>
+<pre><object width="95%" height="200" type="text/plain" data="../examples/example2.txt" border="1" ></object>    
 </pre></dd></details>
 
 

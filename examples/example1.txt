@@ -1,0 +1,45 @@
+
+Ox Professional version 8.10 (Windows_64/U/MT) (C) J.A. Doornik, 1994-2019
+No debug mode in this version
+Interactive Menu: test
+[00] Run All (excluding sub-options)
+[01] Call 1
+[02] Call 2
+[03] Sub
+[-2]  Help on Menu
+[-1]  QUIT
+? 1
+Output of test:Call 1
+---------------------------
+KEEP LOG 1 0
+Using parameter. param = 99
+... finished.
+Press any key and ENTER to continue or return
+
+[00] Run All (excluding sub-options)
+[01] Call 1
+[02] Call 2
+[03] Sub
+[-2]  Help on Menu
+[-1]  QUIT
+? 3
+Interactive Menu: binomial
+[00] Run All (excluding sub-options)
+[01] Sub1A
+[02] Sub2
+[-2]  Help on Menu
+[-1]  QUIT
+? 0
+KEEP LOG 0 0
+Using parameter. param = 55
+KEEP LOG 0 0
+Call 2. Do whatever
+Press any key and ENTER to continue
+
+[00] Run All (excluding sub-options)
+[01] Sub1A
+[02] Sub2
+[-2]  Help on Menu
+[-1]  QUIT
+? -1
+Press any key and ENTER to continue or return

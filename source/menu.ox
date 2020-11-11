@@ -74,18 +74,14 @@ CallMenu::make_the_call(item) {
 		}
 	if (!isfunction(item[call]))
 		return;
-    decl flog = 0;
     if (keeplog) {
-	   flog = fopen(logdir+replace(item[prompt]," ","_")+".txt","l");
+	   fopen(logdir+replace(item[prompt]," ","_")+".txt","l");
 	   println("Output of ",name+":"+item[prompt],sep);
        }
 	item[call]();
     if (keeplog) {
         println("... finished.\n");
-        }
-	if (isfile(flog)) {
-        fclose(flog);
-	    flog = 0;
+        fclose("l");
         }
 	}
 
@@ -206,7 +202,7 @@ ParamMenu::ParamMenu(name,keeplog){
 
 **/
 ParamMenu::SetPars(TargFunc) {
-	decl k, key, n, it;
+	decl k, key, n, it, ncall=0;
 	println("Set Parameters for ",name);
     n = sizeof(items);
     pars = new array[n];
@@ -219,11 +215,16 @@ ParamMenu::SetPars(TargFunc) {
        if (k<sizeof(items)) {
 	       switch_single(k) {
                 case EXIT : exit(0);
-	   		    case SEND : if (!isfunction(TargFunc))
-                                return pars;
+	   		    case SEND : if (!isfunction(TargFunc))    return pars;
+                            ++ncall;
+                            if (keeplog) {
+	                                fopen(logdir+replace(name," ","_")+"_Call_"+sprint(ncall)+".txt","l");
+	                               println("Output of ",name,"with parameters ",pars,sep);
+                                   }
                             TargFunc(pars);
-                            println("Function Complete. Press ",EXIT," to exit or any other key and ENTER to continue.");
-                            scan("? ","%2c",&key);
+                            if (keeplog) {println("... finished.\n"); fclose("l");}
+                            println("Enter ",EXIT," to exit or ",SEND," to continue.");
+                            scan("? ","%i",&key);
                     default : {
                         if (isint(pars[k])) scan("? ","%d",&key);
                         else if (isdouble(pars[k])) scan("? ","%g",&key);

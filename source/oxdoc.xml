@@ -1,6 +1,6 @@
 <oxdoc>
-<option name="outputdir" value="../doc" />
-<option name="imagedir" value="../doc" />
+<option name="outputdir" value="../docs" />
+<option name="imagedir" value="../docs" />
 <option name="projectname" value="Create and Display Menus of Functions in Ox" />
 <option name="windowtitle" value="OxMenu" />
 </oxdoc>

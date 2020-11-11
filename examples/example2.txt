@@ -1,0 +1,54 @@
+
+Ox Professional version 8.10 (Windows_64/U/MT) (C) J.A. Doornik, 1994-2019
+No debug mode in this version
+Set Parameters for test
+[00] CES param Current Value: -1.2
+[01] Endowment Current Value:
+       3.0000       2.0000
+       2.0000       3.0000
+
+[02] Prices  Current Value:
+       1.0000
+       1.0000
+
+[-3]  Exit Ox
+[-2] Reset to default list
+[-1]  Send current parameters to target
+? -1
+parameters:
+[0] = -1.2
+[1] =
+       3.0000       2.0000
+       2.0000       3.0000
+[2] =
+       1.0000
+       1.0000
+Enter -3 to exit or -1 to continue.
+? -1
+[00] CES param Current Value: -1.2
+[01] Endowment Current Value:
+       3.0000       2.0000
+       2.0000       3.0000
+
+[02] Prices  Current Value:
+       1.0000
+       1.0000
+
+[-3]  Exit Ox
+[-2] Reset to default list
+[-1]  Send current parameters to target
+? 2
+?5 4
+[00] CES param Current Value: -1.2
+[01] Endowment Current Value:
+       3.0000       2.0000
+       2.0000       3.0000
+
+[02] Prices  Current Value:
+       5.0000
+       4.0000
+
+[-3]  Exit Ox
+[-2] Reset to default list
+[-1]  Send current parameters to target
+? -3

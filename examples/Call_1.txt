@@ -1,0 +1,32 @@
+Output of test:Call 1
+---------------------------
+KEEP LOG 1 0
+Using parameter. param = 99
+... finished.
+[00] Run All (excluding sub-options)
+[01] Call 1
+[02] Call 2
+[03] Sub 
+[-2]  Help on Menu
+[-1]  QUIT 
+Interactive Menu: binomial
+[00] Run All (excluding sub-options)
+[01] Sub1A 
+[02] Sub2 
+[-2]  Help on Menu
+[-1]  QUIT 
+KEEP LOG 0 0
+Using parameter. param = 55
+KEEP LOG 0 0
+Call 2. Do whatever
+[00] Run All (excluding sub-options)
+[01] Sub1A 
+[02] Sub2 
+[-2]  Help on Menu
+[-1]  QUIT 
+[00] Run All (excluding sub-options)
+[01] Call 1
+[02] Call 2
+[03] Sub 
+[-2]  Help on Menu
+[-1]  QUIT 
