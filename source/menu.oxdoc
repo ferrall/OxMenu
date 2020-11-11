@@ -1,6 +1,8 @@
-/** Keyboard and Command Line Menus for Code and Parameter <a href="https://github.com/ferrall/OxMenu/releases/latest">Latest Release</a>.
+/** Keyboard and Command Line Menus for Running Functions and Setting Parameter Values; Get the <a href="https://github.com/ferrall/OxMenu/releases/latest">Latest Release</a>.
 
-<DT>This package offers two classes for prompting user of an Ox program to select from a menu of functions and sub menus.</DT>
+<DT>This package offers two classes for prompting user of an Ox program to select from a menu.</DT>
+    <DD><code>CallMenu</code> handles options to call different Ox functions, including submenus</DD>
+    <DD><code>ParamMenu</code> handles a list of parameters to send to a function</DD>
 
 <DT>The programmer creates an object of the class for the menu.  It then adds a list of items for the menu.</DT>
 <DD><code>CallMenu</code> an item is array of two things: prompt and either a functions to run or submenu to enter.</DD>
@@ -19,25 +21,25 @@
 <DD>For ParamMenu if no arguments are given then default parameters are returned or used.  Otherwise command line arguments
 are in the form: <code>k=val</code> where <code>k</code> is the index, "=" is the equal sign and <code>val</code> is either an integer, double or a string containing elements of a matrix parameter to be scanned in using the "%M" formatting code.
 
-<details><summary>An CallMenu example: <a href="javascript:popoxcode('../examples/example1.ox');">examples/example1.ox</a>.</summary>
+<details><summary>An CallMenu example: <a href="javascript:popoxcode('./examples/example1.ox');">examples/example1.ox</a>.</summary>
 <dd><h4>Code</h4>    
-<pre><object width="95%" height="300" type="text/plain" data="../examples/example1.ox" border="1" ></object></pre>
+<pre><object width="95%" height="300" type="text/plain" data="./examples/example1.ox" border="1" ></object></pre>
 <h4>Output</h4>
-<pre><object width="95%" height="200" type="text/plain" data="../examples/example1.txt" border="1" ></object>
+<pre><object width="95%" height="200" type="text/plain" data="./examples/example1.txt" border="1" ></object>
 </pre>
 </dd>
 
 </details>
 
 
-<details><summary>A ParamMenu example:<a href="javascript:popoxcode('../examples/example2.ox');">examples/example2.ox</a>.</summary>
+<details><summary>A ParamMenu example:<a href="javascript:popoxcode('./examples/example2.ox');">examples/example2.ox</a>.</summary>
 <dd><h4>Code</h4>
-<pre><object width="95%" height="300" type="text/plain" data="../examples/example2.ox" border="1" ></object>
+<pre><object width="95%" height="300" type="text/plain" data="./examples/example2.ox" border="1" ></object>
 <h4>Output</h4>
-<pre><object width="95%" height="200" type="text/plain" data="../examples/example2.txt" border="1" ></object>    
+<pre><object width="95%" height="200" type="text/plain" data="./examples/example2.txt" border="1" ></object>    
 </pre></dd></details>
 
 
-@author  Copyright &copy; 2017-2020 <a href="http://econ.queensu.ca/~ferrall">Christopher Ferrall</a>.
+@author  Copyright &copy; 2017-2020 <a href="https://ferrall.github.io/">Christopher Ferrall</a>.
 
 **/ 
