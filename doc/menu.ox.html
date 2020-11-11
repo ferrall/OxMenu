@@ -14,10 +14,15 @@
  | <img class="icon" src="icons/hierarchy_s.png">&nbsp;<a href="hierarchy.html">Class hierarchy</a> ]</div>
 <h1><span class="icon"><img class="icon" src="icons/file.png">&nbsp;</span><span class="text">menu.ox</span></h1>
 
-A Class to create and display a menus of Ox functions.
+Keyboard and Command Line Menus for Code and Parameter Values.
 <P/>
-And example is here: <code>OxMenu\examples\example1.ox</code>
+This package offers two flavor sa class for prompting user of an Ox program to select from a menu of functions and sub menus.  
 <P/>
+The programmer sets up a list of prompts for either a list a functions to run or parameters to set.  The menu version allows for a hierarchy of menus and options such as "run all."  THe parameter list version can send the list to a function or return the parameter to the calling routine.
+<P/>
+These can also be used to parse command line options.
+<P/>
+<details><summary>An example for Menu of functions to run is here: <code>OxMenu\examples\example1.ox</code></summary>
 <dd><pre>
 --------------- Ox at 19:39:43 on 19-Nov-2017 ---------------
 <P/>
@@ -48,7 +53,7 @@ This is the default help text.
 Output of test:Call 1
 ---------------------------
 Call 1
-... finished.                              
+... finished.
 Press any key and ENTER to continue or return
 <P/>
 [00] Run All (excluding sub-options)
@@ -58,10 +63,68 @@ Press any key and ENTER to continue or return
 [-2]  Help on Menu
 [-1]  QUIT
 ?<b>-1</b>                                           User quits
-    </pre></dd>
+    </pre></dd></details>
+<P/>
+<details><summary>An example for setting parameters for a function is here: <code>OxMenu\examples\example2.ox</code></summary>
+<dd><pre></pre></dd></details>
 
-<dl><dt class="author">Author:</dt><dd class="author"> Copyright &copy; 2017 <a href="http://econ.queensu.ca/~ferrall">Christopher Ferrall</a>.</dd>
+<dl><dt class="author">Author:</dt><dd class="author"> Copyright &copy; 2017-2020 <a href="http://econ.queensu.ca/~ferrall">Christopher Ferrall</a>.</dd>
 </dl>
+<a name="CallMenu"></a>
+<h2><span class="icon"><img class="icon" src="icons/class.png">&nbsp;</span><span class="text">CallMenu : <a href="menu.ox.html#Menu">Menu</a></span></h2>
+
+A class for choosing from a menu of functions and submenus interactively or from the command line.
+
+<table class="method_table">
+<tr><td colspan="3" class="header" valign="top">Public fields</td></tr><tr class="even">
+<td class="declaration"><img class="icon" src="icons/field_s.png">&nbsp;<a href="menu.ox.html#CallMenu___help_text">help_text</a></td>
+<td class="modifiers"></td>
+<td class="description">string printed if HELP selected.</td>
+</tr>
+<tr class="odd">
+<td class="declaration"><img class="icon" src="icons/field_s.png">&nbsp;<a href="menu.ox.html#CallMenu___IamMain">IamMain</a></td>
+<td class="modifiers"></td>
+<td class="description">TRUE if top menu.</td>
+</tr>
+<tr><td colspan="3" class="header" valign="top">Public methods</td></tr><tr class="odd">
+<td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#CallMenu___add">add</a></td>
+<td class="modifiers"></td>
+<td class="description">Add an item to the Callmenu.</td>
+</tr>
+<tr class="even">
+<td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#CallMenu___CallMenu">CallMenu</a></td>
+<td class="modifiers"></td>
+<td class="description">Create a new CallMenu object.</td>
+</tr>
+<tr class="odd">
+<td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#CallMenu___CmdLine">CmdLine</a></td>
+<td class="modifiers"></td>
+<td class="description">Run options from command line if any, otherwise go interactive.</td>
+</tr>
+<tr class="even">
+<td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#CallMenu___make_the_call">make_the_call</a></td>
+<td class="modifiers"></td>
+<td class="description">Call the function or enter the submenu selected.</td>
+</tr>
+<tr class="odd">
+<td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#CallMenu___Run">Run</a></td>
+<td class="modifiers"></td>
+<td class="description">Run the menu.</td>
+</tr>
+</table>
+
+<dl class="inherited">
+<dt>Inherited methods from <a href="menu.ox.html#Menu">Menu</a>:</dt><dd><a href="menu.ox.html#Menu___itemparse">itemparse</a>, <a href="menu.ox.html#Menu___Menu">Menu</a>, <a href="menu.ox.html#Menu___SetLogDir">SetLogDir</a>, <a href="menu.ox.html#Menu___~Menu">~Menu</a></dd>
+</dl>
+
+<dl class="inherited">
+<dt>Inherited fields from <a href="menu.ox.html#Menu">Menu</a>:</dt><dd><a href="menu.ox.html#Menu___items">items</a>, <a href="menu.ox.html#Menu___keeplog">keeplog</a>, <a href="menu.ox.html#Menu___logdir">logdir</a>, <a href="menu.ox.html#Menu___name">name</a>, <a href="menu.ox.html#Menu___sep">sep</a></dd>
+</dl>
+
+<dl class="inherited">
+<dt>Inherited enumerations from <a href="menu.ox.html#Menu">Menu</a>:</dt><dd><a href="menu.ox.html#Menu___Anonymous enum 1">Anonymous enum 1</a>, <a href="menu.ox.html#Menu___Anonymous enum 2">Anonymous enum 2</a></dd>
+</dl>
+
 <a name="Menu"></a>
 <h2><span class="icon"><img class="icon" src="icons/class.png">&nbsp;</span><span class="text">Menu</span></h2>
 
@@ -69,94 +132,142 @@ A menu object.
 
 <table class="method_table">
 <tr><td colspan="3" class="header" valign="top">Public fields</td></tr><tr class="even">
-<td class="declaration"><img class="icon" src="icons/field_s.png">&nbsp;<a href="menu.ox.html#Menu___help_text">help_text</a></td>
-<td class="modifiers"></td>
-<td class="description">string printed if HELP selected.</td>
-</tr>
-<tr class="odd">
-<td class="declaration"><img class="icon" src="icons/field_s.png">&nbsp;<a href="menu.ox.html#Menu___IamMain">IamMain</a></td>
-<td class="modifiers"></td>
-<td class="description">TRUE if top menu.</td>
-</tr>
-<tr class="even">
 <td class="declaration"><img class="icon" src="icons/field_s.png">&nbsp;<a href="menu.ox.html#Menu___items">items</a></td>
 <td class="modifiers"></td>
 <td class="description">array containing menu.</td>
 </tr>
 <tr class="odd">
-<td class="declaration"><img class="icon" src="icons/field_s.png">&nbsp;<a href="menu.ox.html#Menu___logoutput">logoutput</a></td>
+<td class="declaration"><img class="icon" src="icons/field_s.png">&nbsp;<a href="menu.ox.html#Menu___keeplog">keeplog</a></td>
 <td class="modifiers"></td>
-<td class="description">TRUE: create a logfile for this run.</td>
+<td class="description">log calls from this menu.</td>
 </tr>
 <tr class="even">
+<td class="declaration"><img class="icon" src="icons/field_s.png">&nbsp;<a href="menu.ox.html#Menu___logdir">logdir</a></td>
+<td class="modifiers">static</td>
+<td class="description">Folder for logs.</td>
+</tr>
+<tr class="odd">
 <td class="declaration"><img class="icon" src="icons/field_s.png">&nbsp;<a href="menu.ox.html#Menu___name">name</a></td>
 <td class="modifiers"></td>
 <td class="description">string: menu name.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="declaration"><img class="icon" src="icons/field_s.png">&nbsp;<a href="menu.ox.html#Menu___sep">sep</a></td>
 <td class="modifiers">static const</td>
 <td class="description"></td>
 </tr>
-<tr><td colspan="3" class="header" valign="top">Public methods</td></tr><tr class="odd">
+<tr><td colspan="3" class="header" valign="top">Public methods</td></tr><tr class="even">
 <td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#Menu___add">add</a></td>
-<td class="modifiers"></td>
-<td class="description">Add an item to the menu.</td>
+<td class="modifiers">virtual</td>
+<td class="description"></td>
+</tr>
+<tr class="odd">
+<td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#Menu___CmdLine">CmdLine</a></td>
+<td class="modifiers">virtual</td>
+<td class="description"></td>
 </tr>
 <tr class="even">
+<td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#Menu___itemparse">itemparse</a></td>
+<td class="modifiers">static</td>
+<td class="description">Find the menu item corresponding to the token.</td>
+</tr>
+<tr class="odd">
 <td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#Menu___Menu">Menu</a></td>
 <td class="modifiers"></td>
 <td class="description">Create a new menu object.</td>
 </tr>
-<tr class="odd">
-<td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#Menu___Run">Run</a></td>
-<td class="modifiers"></td>
-<td class="description">Run the menu.</td>
-</tr>
 <tr class="even">
+<td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#Menu___SetLogDir">SetLogDir</a></td>
+<td class="modifiers">static</td>
+<td class="description">Set the static folder to place logs of calls for all menus.</td>
+</tr>
+<tr class="odd">
 <td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#Menu___~Menu">~Menu</a></td>
 <td class="modifiers"></td>
 <td class="description"></td>
 </tr>
-<tr><td colspan="3" class="header" valign="top">Enumerations</td></tr><tr class="even">
+<tr><td colspan="3" class="header" valign="top">Enumerations</td></tr><tr class="odd">
 <td class="declaration"><img class="icon" src="icons/enum_s.png">&nbsp;<a href="menu.ox.html#Menu___Anonymous enum 1">Anonymous enum 1</a></td>
 <td class="modifiers"></td>
 <td class="description"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="declaration"><img class="icon" src="icons/enum_s.png">&nbsp;<a href="menu.ox.html#Menu___Anonymous enum 2">Anonymous enum 2</a></td>
 <td class="modifiers"></td>
 <td class="description"></td>
 </tr>
 </table>
 
-<h2><span class="icon"><img class="icon" src="icons/class.png">&nbsp;</span><span class="text">Menu</span></h2>
+<a name="ParamMenu"></a>
+<h2><span class="icon"><img class="icon" src="icons/class.png">&nbsp;</span><span class="text">ParamMenu : <a href="menu.ox.html#Menu">Menu</a></span></h2>
 
-<table class="enum_table">
-<tr><td colspan="3" class="header" valign="top">Enumerations</td></tr><tr class="even">
-<td class="declaration"><a name="Menu___Anonymous enum 1"></a>Anonymous enum 1</td>
+A class for reading in parameters interactively.
+
+<table class="method_table">
+<tr><td colspan="3" class="header" valign="top">Public fields</td></tr><tr class="even">
+<td class="declaration"><img class="icon" src="icons/field_s.png">&nbsp;<a href="menu.ox.html#ParamMenu___pars">pars</a></td>
+<td class="modifiers"></td>
 <td class="description"></td>
-<td class="elements">prompt, call, ItemSize</td>
+</tr>
+<tr><td colspan="3" class="header" valign="top">Public methods</td></tr><tr class="even">
+<td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#ParamMenu___add">add</a></td>
+<td class="modifiers"></td>
+<td class="description">add parameters to the list.</td>
 </tr>
 <tr class="odd">
-<td class="declaration"><a name="Menu___Anonymous enum 2"></a>Anonymous enum 2</td>
+<td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#ParamMenu___CmdLine">CmdLine</a></td>
+<td class="modifiers"></td>
+<td class="description">Set parameter values from the command line.</td>
+</tr>
+<tr class="even">
+<td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#ParamMenu___ParamMenu">ParamMenu</a></td>
+<td class="modifiers"></td>
 <td class="description"></td>
-<td class="elements">HELP, QUIT, DOALL, CHOICE</td>
+</tr>
+<tr class="odd">
+<td class="declaration"><img class="icon" src="icons/method_s.png">&nbsp;<a href="menu.ox.html#ParamMenu___SetPars">SetPars</a></td>
+<td class="modifiers"></td>
+<td class="description">Set Parameters.</td>
+</tr>
+<tr><td colspan="3" class="header" valign="top">Enumerations</td></tr><tr class="odd">
+<td class="declaration"><img class="icon" src="icons/enum_s.png">&nbsp;<a href="menu.ox.html#ParamMenu___Anonymous enum 1">Anonymous enum 1</a></td>
+<td class="modifiers"></td>
+<td class="description"></td>
 </tr>
 </table>
 
-<a name="Menu___add"></a>
+<dl class="inherited">
+<dt>Inherited methods from <a href="menu.ox.html#Menu">Menu</a>:</dt><dd><a href="menu.ox.html#Menu___itemparse">itemparse</a>, <a href="menu.ox.html#Menu___Menu">Menu</a>, <a href="menu.ox.html#Menu___SetLogDir">SetLogDir</a>, <a href="menu.ox.html#Menu___~Menu">~Menu</a></dd>
+</dl>
+
+<dl class="inherited">
+<dt>Inherited fields from <a href="menu.ox.html#Menu">Menu</a>:</dt><dd><a href="menu.ox.html#Menu___items">items</a>, <a href="menu.ox.html#Menu___keeplog">keeplog</a>, <a href="menu.ox.html#Menu___logdir">logdir</a>, <a href="menu.ox.html#Menu___name">name</a>, <a href="menu.ox.html#Menu___sep">sep</a></dd>
+</dl>
+
+<dl class="inherited">
+<dt>Inherited enumerations from <a href="menu.ox.html#Menu">Menu</a>:</dt><dd><a href="menu.ox.html#Menu___Anonymous enum 2">Anonymous enum 2</a></dd>
+</dl>
+
+<h2><span class="icon"><img class="icon" src="icons/class.png">&nbsp;</span><span class="text">CallMenu</span></h2>
+
+<a name="CallMenu___add"></a>
 <h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">add</span></h3>
 
-<span class="declaration">Menu :: add ( ... )</span>
+<span class="declaration">CallMenu :: add ( ... )</span>
 <dl><dd>
-Add an item to the menu.
+Add an item to the Callmenu.
 
 <dl><dt class="parameters">Parameters:</dt><dd class="parameters"><!-- parameter table --!>
 <table class="parameter_table">
 <tr>
 <td class="declaration" valign="baseline">...</td>
 <td class="description" valign="baseline">list of items, each an array of size ItemSize
+<P/>
+The first element of an item is a prompt string.  The second is either a static function of the form
+<code>func()</code>.  Or, it is another menu object that is a submenu.  One way to organize submenus is
+to write a function that creates and returns the submenu object then call it and return its value as the
+call item as shown below.
+<P/>
 </td>
 </tr>
 </table>
@@ -166,56 +277,17 @@ Add an item to the menu.
 			{"Sub ",menu3()}
             );
 </dd>
+</dd>
 </dl>
 </dd></dl>
 
 <hr>
-<a name="Menu___help_text"></a>
-<h3><span class="icon"><img class="icon" src="icons/field.png">&nbsp;</span><span class="text">help_text</span></h3>
+<a name="CallMenu___CallMenu"></a>
+<h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">CallMenu</span></h3>
 
-<span class="declaration">decl help_text [public]</span>
+<span class="declaration">CallMenu :: CallMenu ( name , keeplog , IamMain )</span>
 <dl><dd>
-string printed if HELP selected.
-
-</dd></dl>
-
-<hr>
-<a name="Menu___IamMain"></a>
-<h3><span class="icon"><img class="icon" src="icons/field.png">&nbsp;</span><span class="text">IamMain</span></h3>
-
-<span class="declaration">decl IamMain [public]</span>
-<dl><dd>
-TRUE if top menu.
-
-</dd></dl>
-
-<hr>
-<a name="Menu___items"></a>
-<h3><span class="icon"><img class="icon" src="icons/field.png">&nbsp;</span><span class="text">items</span></h3>
-
-<span class="declaration">decl items [public]</span>
-<dl><dd>
-array containing menu.
-
-</dd></dl>
-
-<hr>
-<a name="Menu___logoutput"></a>
-<h3><span class="icon"><img class="icon" src="icons/field.png">&nbsp;</span><span class="text">logoutput</span></h3>
-
-<span class="declaration">decl logoutput [public]</span>
-<dl><dd>
-TRUE: create a logfile for this run.
-
-</dd></dl>
-
-<hr>
-<a name="Menu___Menu"></a>
-<h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">Menu</span></h3>
-
-<span class="declaration">Menu :: Menu ( name , IamMain )</span>
-<dl><dd>
-Create a new menu object.
+Create a new CallMenu object.
 
 <dl><dt class="parameters">Parameters:</dt><dd class="parameters"><!-- parameter table --!>
 <table class="parameter_table">
@@ -225,34 +297,83 @@ Create a new menu object.
 </td>
 </tr>
 <tr>
+<td class="declaration" valign="baseline">keeplog</td>
+<td class="description" valign="baseline">FALSE[default] do not open a log file for each call </br>TRUE open a log file
+</td>
+</tr>
+<tr>
 <td class="declaration" valign="baseline">IamMain</td>
 <td class="description" valign="baseline">TRUE, the highest level menu [default]</br> FALSE, sub menu
 </td>
 </tr>
 </table>
 </dd>
-<dt class="example">Example:</dt><dd class="example">decl m = new Menu("options");
+<dt class="example">Example:</dt><dd class="example">decl m = new CallMenu("options");
 <P/>
-	decl m = new Menu("suboptions",FALSE);
+	decl m = new CallMenu("suboptions",FALSE);
 </dd>
 </dl>
 </dd></dl>
 
 <hr>
-<a name="Menu___name"></a>
-<h3><span class="icon"><img class="icon" src="icons/field.png">&nbsp;</span><span class="text">name</span></h3>
+<a name="CallMenu___CmdLine"></a>
+<h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">CmdLine</span></h3>
 
-<span class="declaration">decl name [public]</span>
+<span class="declaration">CallMenu :: CmdLine ( )</span>
 <dl><dd>
-string: menu name.
+Run options from command line if any, otherwise go interactive.
+The form of options is either integers corresponding to the indices of the menu options or
+the corresponding prompts as strings.  If the item is a submenu then the next token in the
+<dd><pre>
+  oxl main opt1 [sub1 ...] opt
+</pre></dd>
 
 </dd></dl>
 
 <hr>
-<a name="Menu___Run"></a>
+<a name="CallMenu___help_text"></a>
+<h3><span class="icon"><img class="icon" src="icons/field.png">&nbsp;</span><span class="text">help_text</span></h3>
+
+<span class="declaration">decl help_text [public]</span>
+<dl><dd>
+string printed if HELP selected.
+
+</dd></dl>
+
+<hr>
+<a name="CallMenu___IamMain"></a>
+<h3><span class="icon"><img class="icon" src="icons/field.png">&nbsp;</span><span class="text">IamMain</span></h3>
+
+<span class="declaration">decl IamMain [public]</span>
+<dl><dd>
+TRUE if top menu.
+
+</dd></dl>
+
+<hr>
+<a name="CallMenu___make_the_call"></a>
+<h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">make_the_call</span></h3>
+
+<span class="declaration">CallMenu :: make_the_call ( item )</span>
+<dl><dd>
+Call the function or enter the submenu selected.
+
+<dl><dt class="parameters">Parameters:</dt><dd class="parameters"><!-- parameter table --!>
+<table class="parameter_table">
+<tr>
+<td class="declaration" valign="baseline">item</td>
+<td class="description" valign="baseline"> menu item</td>
+</tr>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<hr>
+<a name="CallMenu___Run"></a>
 <h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">Run</span></h3>
 
-<span class="declaration">Menu :: Run ( logoutput )</span>
+<span class="declaration">CallMenu :: Run ( )</span>
 <dl><dd>
 Run the menu.
 
@@ -269,6 +390,126 @@ Run the menu.
 </dd>
 </dl>
 </dd></dl>
+<h2><span class="icon"><img class="icon" src="icons/class.png">&nbsp;</span><span class="text">Menu</span></h2>
+
+<table class="enum_table">
+<tr><td colspan="3" class="header" valign="top">Enumerations</td></tr><tr class="even">
+<td class="declaration"><a name="Menu___Anonymous enum 1"></a>Anonymous enum 1</td>
+<td class="description"></td>
+<td class="elements">prompt, call, ItemSize</td>
+</tr>
+<tr class="odd">
+<td class="declaration"><a name="Menu___Anonymous enum 2"></a>Anonymous enum 2</td>
+<td class="description"></td>
+<td class="elements">EXIT, HELP, QUIT, DOALL, CHOICE</td>
+</tr>
+</table>
+
+<a name="Menu___add"></a>
+<h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">add</span></h3>
+
+<dl><dd>
+
+</dd></dl>
+
+<hr>
+<a name="Menu___CmdLine"></a>
+<h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">CmdLine</span></h3>
+
+<dl><dd>
+
+</dd></dl>
+
+<hr>
+<a name="Menu___itemparse"></a>
+<h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">itemparse</span></h3>
+
+<span class="declaration">static Menu :: itemparse ( token , items )</span>
+<dl><dd>
+Find the menu item corresponding to the token.
+
+<dl><dt class="parameters">Parameters:</dt><dd class="parameters"><!-- parameter table --!>
+<table class="parameter_table">
+<tr>
+<td class="declaration" valign="baseline">token</td>
+<td class="description" valign="baseline">a string prompt or an integer index
+</td>
+</tr>
+<tr>
+<td class="declaration" valign="baseline">items</td>
+<td class="description" valign="baseline">a list of menu items.
+</td>
+</tr>
+</table>
+</dd>
+<dt class="returns">Returns:</dt><dd class="returns">integer index into the list
+</dd>
+</dl>
+</dd></dl>
+
+<hr>
+<a name="Menu___items"></a>
+<h3><span class="icon"><img class="icon" src="icons/field.png">&nbsp;</span><span class="text">items</span></h3>
+
+<span class="declaration">decl items [public]</span>
+<dl><dd>
+array containing menu.
+
+</dd></dl>
+
+<hr>
+<a name="Menu___keeplog"></a>
+<h3><span class="icon"><img class="icon" src="icons/field.png">&nbsp;</span><span class="text">keeplog</span></h3>
+
+<span class="declaration">decl keeplog [public]</span>
+<dl><dd>
+log calls from this menu.
+
+</dd></dl>
+
+<hr>
+<a name="Menu___logdir"></a>
+<h3><span class="icon"><img class="icon" src="icons/field.png">&nbsp;</span><span class="text">logdir</span></h3>
+
+<span class="declaration">static decl logdir [public]</span>
+<dl><dd>
+Folder for logs.
+
+</dd></dl>
+
+<hr>
+<a name="Menu___Menu"></a>
+<h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">Menu</span></h3>
+
+<span class="declaration">Menu :: Menu ( name , keeplog )</span>
+<dl><dd>
+Create a new menu object.
+
+<dl><dt class="parameters">Parameters:</dt><dd class="parameters"><!-- parameter table --!>
+<table class="parameter_table">
+<tr>
+<td class="declaration" valign="baseline">name</td>
+<td class="description" valign="baseline">string, name of menu
+</td>
+</tr>
+<tr>
+<td class="declaration" valign="baseline">keeplog</td>
+<td class="description" valign="baseline">FALSE[default] do not open a log file for each call </br>TRUE open a log file</td>
+</tr>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<hr>
+<a name="Menu___name"></a>
+<h3><span class="icon"><img class="icon" src="icons/field.png">&nbsp;</span><span class="text">name</span></h3>
+
+<span class="declaration">decl name [public]</span>
+<dl><dd>
+string: menu name.
+
+</dd></dl>
 
 <hr>
 <a name="Menu___sep"></a>
@@ -280,12 +521,124 @@ Run the menu.
 </dd></dl>
 
 <hr>
+<a name="Menu___SetLogDir"></a>
+<h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">SetLogDir</span></h3>
+
+<span class="declaration">static Menu :: SetLogDir ( folder )</span>
+<dl><dd>
+Set the static folder to place logs of calls for all menus.
+
+<dl><dt class="parameters">Parameters:</dt><dd class="parameters"><!-- parameter table --!>
+<table class="parameter_table">
+<tr>
+<td class="declaration" valign="baseline">folder</td>
+<td class="description" valign="baseline">string, a path.  Default is "./"</td>
+</tr>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+<hr>
 <a name="Menu___~Menu"></a>
 <h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">~Menu</span></h3>
 
 <span class="declaration">Menu :: ~ Menu ( )</span>
 <dl><dd>
 
+</dd></dl>
+<h2><span class="icon"><img class="icon" src="icons/class.png">&nbsp;</span><span class="text">ParamMenu</span></h2>
+
+<table class="enum_table">
+<tr><td colspan="3" class="header" valign="top">Enumerations</td></tr><tr class="even">
+<td class="declaration"><a name="ParamMenu___Anonymous enum 1"></a>Anonymous enum 1</td>
+<td class="description"></td>
+<td class="elements">RESET, SEND, Value</td>
+</tr>
+</table>
+
+<a name="ParamMenu___add"></a>
+<h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">add</span></h3>
+
+<span class="declaration">ParamMenu :: add ( ... )</span>
+<dl><dd>
+add parameters to the list.
+
+<dl><dt class="parameters">Parameters:</dt><dd class="parameters"><!-- parameter table --!>
+<table class="parameter_table">
+<tr>
+<td class="declaration" valign="baseline">...</td>
+<td class="description" valign="baseline">list of parameters each an array of size ItemSize
+<P/>
+The first element of an item is a prompt string.  The second is the default value of the parameter,
+which can be an integer, double or matrix.  The dimensions of the matrix determines the shape to
+be read in (dimensions are fixed).
+<P/>
+</td>
+</tr>
+</table>
+</dd>
+<dt class="example">Example:</dt><dd class="example">m->add( {"sigma",0.5},
+			{"Index",3},
+			{"Values",<0;2;3>}
+            );
+</dd>
+</dd>
+</dl>
+</dd></dl>
+
+<hr>
+<a name="ParamMenu___CmdLine"></a>
+<h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">CmdLine</span></h3>
+
+<span class="declaration">ParamMenu :: CmdLine ( TargFunc )</span>
+<dl><dd>
+Set parameter values from the command line.
+index=val
+index is an integer index
+= is the symbol "="
+val is either an integer or double or a string containing numbers to be read in to a
+
+</dd></dl>
+
+<hr>
+<a name="ParamMenu___ParamMenu"></a>
+<h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">ParamMenu</span></h3>
+
+<span class="declaration">ParamMenu :: ParamMenu ( name , keeplog )</span>
+<dl><dd>
+
+</dd></dl>
+
+<hr>
+<a name="ParamMenu___pars"></a>
+<h3><span class="icon"><img class="icon" src="icons/field.png">&nbsp;</span><span class="text">pars</span></h3>
+
+<span class="declaration">decl pars [public]</span>
+<dl><dd>
+
+</dd></dl>
+
+<hr>
+<a name="ParamMenu___SetPars"></a>
+<h3><span class="icon"><img class="icon" src="icons/method.png">&nbsp;</span><span class="text">SetPars</span></h3>
+
+<span class="declaration">ParamMenu :: SetPars ( TargFunc )</span>
+<dl><dd>
+Set Parameters.
+
+<dl><dt class="parameters">Parameters:</dt><dd class="parameters"><!-- parameter table --!>
+<table class="parameter_table">
+<tr>
+<td class="declaration" valign="baseline">logoutput</td>
+<td class="description" valign="baseline">TRUE: create a logfile for this run.
+</td>
+</tr>
+</table>
+</dd>
+<dt class="example">Example:</dt><dd class="example">m->SetPars();
+</dd>
+</dl>
 </dd></dl>
 <div class="footer">
 Generated by <a href="http://oxdoc.sourceforge.net">oxdoc 1.1-beta</a> &copy Copyright 2005-2014 by Y. Zwols<br>

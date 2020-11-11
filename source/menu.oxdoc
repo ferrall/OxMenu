@@ -1,50 +1,38 @@
-/** A Class to create and display menus of Ox functions.
+/** Keyboard and Command Line Menus for Code and Parameter Values.
 
-And example is here: <code>OxMenu\examples\example1.ox</code>
+<DT>This package offers two classes for prompting user of an Ox program to select from a menu of functions and sub menus.</DT>
 
+<DT>The programmer creates an object of the class for the menu.  It then adds a list of items for the menu.</DT>
+<DD><code>CallMenu</code> an item is array of two things: prompt and either a functions to run or submenu to enter.</DD>
+<DD>For <code>ParamMenu</code> an item is a prompt and a default value of the parameter.</DD>
+
+<DT>The program can run a menu interactively or read options from command line arguments.</DT>
+
+<DT>Interactive Mode</DT>
+
+<DD>CallMenu prints the menu and reads integer selections from the keyboard. It adds options to run all the items on the list and to navigate submenus, exit Ox altogether or simply quit the menu and return to the program.</DD>
+<DD>ParamMenu prints the parameter list and reads integer selections of values to change.  A second prompt then reads new values from the keyboard.  Matrix elements are entered by row and must match the dimension of the default value.  An option to reset all parameters.  Another option either returns parameters as a list to the calling program or sends the list to a function sent to the interactive menu.  If a function is called, the program returns to the menu and the user can enter new values and continue to rerun the function.</DD>
+
+<DT>Command Line Mode</DT>
+<DD>The command line mode reads arguments sent to the program past a point specified (the default is all command line arguments or menu options.</DD>
+<DD>For CallMenu the items are read as if entered from the keyboard including the DOALL option.  Once a function has been called the menu automatically returns to the top menu and starts over. (In interactive mode the user enters a value to move up a level.)</DD>
+<DD>For ParamMenu if no arguments are given then default parameters are returned or used.  Otherwise command line arguments
+are in the form: <code>k=val</code> where <code>k</code> is the index, "=" is the equal sign and <code>val</code> is either an integer, double or a string containing elements of a matrix parameter to be scanned in using the "%M" formatting code.
+
+<details><summary>An CallMenu example: <a href="javascript:popoxcode('../examples/example1.ox');">examples/example1.ox</a>.</summary>
+    <pre><object width="75%" height="200" type="text/plain" data="../examples/example1.ox" border="1" ><p style="font-size:24pt"></object>
+    </pre>
 <dd><pre>
---------------- Ox at 19:39:43 on 19-Nov-2017 ---------------
-
-Ox Console version 7.20 (Windows/U) (C) J.A. Doornik, 1994-2017
-This version may be used for academic research and teaching only
-
-Interactive Menu: test                              The menu run begins
-[00] Run All (excluding sub-options)
-[01] Call 1
-[02] Call 2
-[03] Sub
-[-2]  Help on Menu
-[-1]  QUIT
-?<b>-2</b>                                          User enters -2 to see help
-
----------------------------                        Menu has no extra help.
-Help:
-This is the default help text.
-
----------------------------
-[00] Run All (excluding sub-options)
-[01] Call 1
-[02] Call 2
-[03] Sub
-[-2]  Help on Menu
-[-1]  QUIT
-?<b>1</b>                                        User chooses option 1
-Output of test:Call 1
----------------------------
-Call 1
-... finished.
-Press any key and ENTER to continue or return
-
-[00] Run All (excluding sub-options)
-[01] Call 1
-[02] Call 2
-[03] Sub
-[-2]  Help on Menu
-[-1]  QUIT
-?<b>-1</b>                                           User quits
-    </pre></dd>
+<object width="75%" height="200" type="text/plain" data="../examples/example1.ox" border="1" ><p style="font-size:24pt"></object>
+</pre></dd></details>
 
 
-@author  Copyright &copy; 2017 <a href="http://econ.queensu.ca/~ferrall">Christopher Ferrall</a>.
+<details><summary>A ParamMenu example: <code>OxMenu\examples\example2.ox</code></summary>
+<dd><pre><a href="javascript:popoxcode('../examples/example2.ox');">examples/example2.ox</a>.</summary>
+    <pre><object width="75%" height="200" type="text/plain" data="../examples/example2.ox" border="1" ><p style="font-size:24pt"></object>
+</pre></dd></details>
+
+
+@author  Copyright &copy; 2017-2020 <a href="http://econ.queensu.ca/~ferrall">Christopher Ferrall</a>.
 
 **/ 
