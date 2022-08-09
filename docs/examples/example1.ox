@@ -1,7 +1,7 @@
 /** Example of a menu of functions and other menus chosen interactively.
 
 **/
-#import "menu"
+#import "../../include/menu"
 
 decl param;
 

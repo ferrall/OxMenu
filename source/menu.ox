@@ -86,21 +86,29 @@ CallMenu::make_the_call(item) {
 	}
 
 /** Find the menu item corresponding to the token.
-@param token a string prompt or an integer index
+@param token a string prompt </br>if it contains an integer index then it is converted
 @param items a list of menu items.
-@return integer index into the list
+@return integer index into the list OR INVALID if too large or not found
 **/
 Menu::itemparse(token,items) {
-    decl r,i;
-    if (isstring(token)){
-        foreach (r in items[i]) if (strfind(r[prompt][i],token)>-1) { token=i; break;}
+    decl r, i, tnum, ok;
+    ok = sscan(token,"%i",&tnum);   //attempt to read a signed integer
+    if (!ok){                       //nope: treat as a string prompt
+        foreach (r in items[i])
+            if (strfind(r[prompt][i],token)>-1) { token=i; break;}
         if (isstring(token)) {
             oxwarning("OxMenu Error: menu item not found "+token);
+            token = INVALID;
             continue;
             }
             }
-    else if (token>=sizeof(items))
-        oxwarning("OxMenu Error: index too large: "+sprint(token)+" versus "+sprint(items));
+    else {                         //yep: check the size of the list
+        token = tnum;
+        if (token>=sizeof(items)) {
+            oxwarning("OxMenu Error: index too large: "+sprint(token)+" versus "+sprint(items));
+            token = INVALID;
+            }
+        }
     return token;
     }
 
@@ -135,6 +143,7 @@ CallMenu::CmdLine(args) {
         curitem = items;
         sscan(args[nx++],"%t",&k);
         k = itemparse(k,curitem);
+        if (k==INVALID) oxrunerror("Quitting Ox because command line input invalid");
         if (k==DOALL) {
 			foreach(it in curitem) if (isfunction(it[call])) make_the_call(it);
             continue;
@@ -180,20 +189,19 @@ CallMenu::Run() {
        else {
  	      println("[",EXIT,"]  Exit Ox\n[",QUIT,"]  go up to previous menu");
           }
- 	   scan("? ","%i",&k);
-       if (k<sizeof(items)) {
-	       switch_single(k) {
-                case EXIT : exit(0);
-	   		    case HELP : println(sep,"Help: \n",help_text,sep);
-	   		    case QUIT : return;
-			    case DOALL: foreach(it in items)
-					               if (isfunction(it[call])) make_the_call(it);
+ 	   scan("? ","%s",&k);
+       k = max(INVALID,itemparse(k,items)); // negative integers recoded to INVALID
+	   switch_single(k) {
+            case INVALID : println("\n *** TRY AGAIN \n");
+            case EXIT : exit(0);
+	   		case HELP : println(sep,"Help: \n",help_text,sep);
+	   		case QUIT : return;
+			case DOALL: foreach(it in items) if (isfunction(it[call])) make_the_call(it);
             	             scan("Press any key and ENTER to continue\n","%2c",&key);
-                default : make_the_call(items[k]);
-           			      scan("Press any key and ENTER to continue or return \n","%2c",&key);
-           } }
-        else println("\nERROR: ",k," is too large. Enter a number less than ",sizeof(items),"\n");
-    	}   while (TRUE);   //user has to enter -1 to QUIT
+            default : make_the_call(items[k]);
+           			  scan("Press any key and ENTER to continue or return \n","%2c",&key);
+           }
+    	}   while (TRUE);   //user has to enter -1 or -3 to drop out of the loop
 	}
 
 Menu::~Menu() {
@@ -242,13 +250,14 @@ ParamMenu::SetPars(TargFunc) {
             default : {
                         if (isint(pars[k])) scan("? ","%d",&key);
                         else if (isdouble(pars[k])) scan("? ","%g",&key);
+                        else if (isstring(pars[k])) scan("? ","%s",&key);
                         else if (ismatrix(pars[k])) scan("?","%#M",rows(pars[k]),columns(pars[k]),&key);
                         pars[k] = key;
                         }
            }
            }
         else println("\nERROR: ",k," too large. Enter a number less than ",n,"\n");
-    	}   while (key!=EXIT);
+    	}   while (TRUE);
 	}
 
 /** Set parameter values from the command line.
