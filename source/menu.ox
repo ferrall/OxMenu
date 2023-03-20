@@ -69,7 +69,12 @@ CallMenu::add(...) {
 **/
 CallMenu::make_the_call(item) {
 	if (isclass(item[call])) {
-		item[call]->Run();
+		if (isclass(item[call],"CallMenu"))
+			item[call]->Run();
+		else if (isclass(item[call],"ParamMenu"))
+			item[call]->SetPars();
+		else
+			oxwarning("menu item is an object but not a CallMenu or ParamMenu");
 		return;
 		}
 	if (!isfunction(item[call]))
@@ -92,7 +97,13 @@ CallMenu::make_the_call(item) {
 **/
 Menu::itemparse(token,items) {
     decl r, i, tnum, ok;
-    ok = sscan(token,"%i",&tnum);   //attempt to read a signed integer
+	if (isint(token)) {
+		ok=TRUE;
+		tnum = token;
+		}
+	else
+    	ok = sscan(token,"%i",&tnum);   //attempt to read a signed integer
+//println(isstring(token)," ",ok," :",token,":",&tnum);	
     if (!ok){                       //nope: treat as a string prompt
         foreach (r in items[i])
             if (strfind(r[prompt][i],token)>-1) { token=i; break;}
@@ -222,21 +233,23 @@ ParamMenu::ParamMenu(name,keeplog,TargFunc){
 
 **/
 ParamMenu::SetPars(TargFunc) {
-	decl k, key, n, it, ncall=0, j;
+	decl k, key, n, it, ncall=0, j,hastarget;
 	println("Set Parameters for ",name);
     n = sizeof(items);
     pars = new array[n];
     foreach(it in items[j]) pars[j] = it[Value];
+	hastarget = isfunction(TargFunc)||isfunction(this.TargFunc);
     do {
 	   foreach (it in items[k] ) println("[","%02u",k,"] ",it[prompt]," Current Value: ",pars[k]," ");
- 	   println("[",EXIT,"]  Exit Ox\n[",RESET,"] Reset to default list\n[",SEND,"] ",
-            isfunction(TargFunc) ? " Send current parameters to target" : " Return current parameters");
+ 	   println("[",EXIT,"]  Exit Ox\n[",
+	   			RESET,"] RESET parameters to default list\n[",
+				SEND,"] ",hastarget ? "SEND current parameters to target function" : "RETURN current parameters");
  	   scan("? ","%i",&k);
        if (k<n) {
 	      switch_single(k) {
             case EXIT : exit(0);
             case RESET: foreach(it in items[j]) pars[j] = it[Value];
-	   		case SEND : if (!isfunction(TargFunc)&&!isfunction(this.TargFunc))
+	   		case SEND : if (!hastarget)
                             return pars;
                         ++ncall;
                         if (keeplog) {
